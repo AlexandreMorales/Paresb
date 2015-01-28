@@ -3,10 +3,11 @@ import java.util.Scanner;
 
 public class Main {
 
+	private static int valor = 0;
+	
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 
-		int valor = 1;
 		int cont100;
 		int cont50;
 		int cont20;
@@ -16,27 +17,12 @@ public class Main {
 			try {
 				System.out.println("\nDigite o valor do saque");
 				valor = input.nextInt();
-				cont100 = 0;
-				cont50 = 0;
-				cont20 = 0;
-				cont10 = 0;
-
-				while (valor >= 100) {
-					valor -= 100;
-					cont100++;
-				}
-				while (valor >= 50) {
-					valor -= 50;
-					cont50++;
-				}
-				while (valor >= 20) {
-					valor -= 20;
-					cont20++;
-				}
-				while (valor >= 10) {
-					valor -= 10;
-					cont10++;
-				}
+				cont100 = contaValor(100);
+				cont50 = contaValor(50);
+				cont20 = contaValor(20);
+				cont10 = contaValor(10);
+				
+				
 				if (valor < 10 && valor > 0) {
 					System.out.println("Não temos notas menores que 10!");
 				}
@@ -58,10 +44,19 @@ public class Main {
 
 			} catch (InputMismatchException e) {
 				System.out.println("Por favor, apenas números inteiros!");
+				valor = 0;
+				input.next();
 			}
 		}
 		input.close();
-
 	}
-
+	
+	public static int contaValor(int nota){
+		int contador = 0;
+		while (valor >= nota) {
+			valor -= nota;
+			contador++;
+		}
+		return contador;
+	}
 }
